@@ -1,0 +1,170 @@
+<form class="" data-toggle="validator" role="form" style="padding: 20px 80px 0px 80px">
+   <div class="border border-secondary-subtle p-4">
+    <div class="form-group">
+        <label for="inputName" class="control-label" >Name</label>
+        <input
+          name="name"
+          class="form-control"
+          [(ngModel)]="userinf.name"
+          id="inputName"
+          placeholder="Enter Yout Name "
+          required=""
+          minlength="10"
+          #ssname="ngModel"
+        />
+      </div>
+      <div class="text-danger">
+        @if(ssname.errors?.['required']){
+            <span>This Is Required *</span>
+        }@else if(ssname.errors?.['minlength']){
+            <span>Min 10 Char*</span>
+        }
+      </div>
+      <div class="form-group has-feedback">
+        <label for="inputTwitter" class="control-label">Username</label>
+        <div class="input-group">
+          <span class="input-group-addon"></span>
+          <input
+            name="username"
+            class="form-control"
+            [(ngModel)]="userinf.username"
+            id="username"
+            placeholder="Enter User Name "
+            required
+          />
+        </div>
+        <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+      </div>
+      <div class="form-group">
+        <label for="inputEmail" class="control-label">Email</label>
+        <input
+          type="email"
+          name="email"
+          class="form-control"
+          [(ngModel)]="userinf.email"
+          id="inputEmail"
+          placeholder="Enter Email"
+          data-error="Bruh, that email address is invalid"
+          required
+          #umail="ngModel"
+        />
+        <div class="text-danger">
+            @if(umail.errors?.['required']){
+                <span>Email Is Required *</span>
+            }
+          </div>
+      </div>
+      <div class="row">
+        <div class="form-group col-6">
+            <label for="inputPassword" class="control-label">Password</label>
+            <div class="form-inline row">
+              <div class="form-group col-sm-6">
+                <input
+                  name="password"
+                  data-minlength="6"
+                  class="form-control"
+                  [(ngModel)]="userinf.password"
+                  id="inputPassword"
+                  placeholder="Password"
+                  required
+                  minlength="8"
+                  #upas="ngModel"
+                />
+              </div>
+            </div>
+          </div>
+          <!-- <div class="text-danger">
+            @if(upas.errors?.['required']){
+                <span>Password is Required *</span>
+            }@else if(upas.errors?.['minlength']){
+                <span>Only for 8 digite*</span>
+            }
+          </div> -->
+          <div class="form-group col-6">
+            <label for="inputPassword" class="control-label">Password</label>
+            <div class="form-inline row">
+              <div class="form-group col-sm-6">
+                <input
+                  name="confirmpassword"
+                  data-minlength="6"
+                  class="form-control"
+                  [(ngModel)]="userinf.confirmpassword"
+                  id="inputPassword"
+                  placeholder="Conform Password"
+                  required
+                />
+              </div>
+            </div>
+          </div>
+      </div>
+      <div class="form-group">
+        <label>Gender</label>
+        <div class="radio">
+          <label>
+            <input type="radio" name="underwear" required />
+            Male
+          </label>
+        </div>
+        <div class="radio">
+          <label>
+            <input type="radio" name="underwear" required />
+            Female
+          </label>
+        </div>
+      </div>
+      <!-- <div class="col-4">
+        {{userinf|json}}
+      </div> -->
+      
+      <div class="col-9    gap-5 p-4">
+        @if(userinf.id==0){
+            <button type="submit" class="btn btn-success" (click)="onsave()">Save</button>
+        }@else {
+            <button type="submit" class="btn btn-warning" (click)="onsave()">Update</button>
+        }
+    </div>
+    
+   </div>
+</form>
+
+
+<div class="col-11  mx-auto" style="padding: 20px 80px 0px 80px;">
+    <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Name</th>
+            <th scope="col">Username</th>
+            <th scope="col">Email</th>
+            <th scope="col">Password</th>
+            <th scope="col">Confirmpassword</th>
+            <th scope="col">Active</th>
+          </tr>
+        </thead>
+        <tbody>
+            @for(item of a ; track $index){
+
+                <tr>
+                    <td>{{$index+1}}</td> 
+                    <td>{{item.name}}</td>
+                    <td>{{item.username}}</td>
+                    <td>{{item.email}}</td>
+                    <td>{{item.password}}</td>
+                    <td>{{item.confirmpassword}}</td>
+                    <td>
+                        <div class="" style="display: inline;">
+                            <button type="submit" class="btn btn-primary" (click)="onEdit(item)">Edit</button>
+                        </div>
+                        <div class="" style="display: inline;">
+                            <button type="submit" class="btn btn-danger" (click)="ondelete()" >Delete</button>
+                        </div>
+                    </td>
+
+
+                </tr>
+            }
+         
+         
+        </tbody>
+      </table>
+</div>
